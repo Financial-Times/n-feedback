@@ -4,6 +4,7 @@
 @import "o-icons/main";
 @import "o-colors/main";
 @import 'o-typography/main';
+@import 'o-loading/main';
 
 @include oFormsBaseFeatures();
 @include oFormsRadioCheckboxFeatures();
@@ -212,3 +213,8 @@
 		display: none;
 	}
 }
+
+@include oLoading($opts: (
+	'themes': ('dark'),
+	'sizes': ('large')
+));
