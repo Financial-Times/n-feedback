@@ -35,10 +35,13 @@ function buildMultipleChoiceQuestion (question) {
 	const validation = question.validation.doesForceResponse;
 
 	const html = [
-		`<fieldset class="n-feedback__question-radio" data-validation=${validation}>
-			<legend>${question.questionText}</legend>
-			<div class="n-feedback__question-radio__container n-feedback__center-block">`
-	]; // fieldsets can't display: flex
+		`<div class="n-feedback__question-radio o-forms-field" role="group" aria-labelledby="n-feedback-form-question-title" data-validation=${validation}>
+			<span class="o-forms-title" aria-hidden="true">
+				<span class="o-forms-title__main" id="n-feedback-form-question-title">${question.questionText}</span>
+			</span>
+			<div class="n-feedback__question-radio__outer-container">
+				<span class="n-feedback__question-radio__container n-feedback__center-block o-forms-input o-forms-input--radio-round o-forms-input--inline">`
+	];
 
 	const choices = Object.entries(question.choices).reverse();
 
@@ -51,16 +54,20 @@ function buildMultipleChoiceQuestion (question) {
 		const fieldId = `choice-${choiceId}-${~~(Math.random()*0xffff)}`;
 
 		html.push(
-			`<div class="n-feedback__question-radio__choice-container">
-				<input type="radio" id="${fieldId}" class="o-forms__radio" name="${question.questionId}" value="${choiceId}" />
-				<label for="${fieldId}" class="o-forms__label ${textVisibility}">
-					<span class="n-feedback__question-radio-text">${choice.choiceText}</span>
-				</label>
-			</div>`
+			`<label class="n-feedback__question-radio__choice-container">
+				<input type="radio" id="${fieldId}" name="${question.questionId}" value="${choiceId}" aria-label="${choice.choiceText}">
+				<span class="o-forms-input__label ${textVisibility}" aria-hidden="true">
+					<span>${choice.choiceText}</span>
+				</span>
+			</label>`
 		);
 	});
 
-	html.push('</div></fieldset>');
+	html.push(`
+				</span>
+			</div>
+		</div>`
+	);
 	return html.join('\n');
 }
 
