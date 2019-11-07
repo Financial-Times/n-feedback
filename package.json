@@ -37,6 +37,7 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
+    "@financial-times/o-overlay": "^2.7.11",
     "handlebars": "^4.1.2"
   }
 }

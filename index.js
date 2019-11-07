@@ -1,4 +1,4 @@
-const Overlay = require('o-overlay');
+const Overlay = require('@financial-times/o-overlay');
 const surveyBuilder = require('./src/survey-builder');
 const postResponse = require('./src/post-response');
 const getAdditionalInfo = require('./src/get-additional-info');
