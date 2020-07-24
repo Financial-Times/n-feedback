@@ -42,12 +42,7 @@ function buildMultipleChoiceQuestion (question) {
 
 	const choices = Object.entries(question.choices).reverse();
 
-	choices.forEach( ([choiceId, choice], current, choices) => {
-		let textVisibility = '';
-		// if not the first or the last element
-		if ( !(choiceId === choices[0][0] || choiceId === choices[choices.length-1][0]) ) {
-			textVisibility = 'hidden-label';
-		}
+	choices.forEach( ([choiceId, choice]) => {
 		const fieldId = `choice-${choiceId}-${~~(Math.random()*0xffff)}`;
 
 		html.push(
@@ -55,7 +50,7 @@ function buildMultipleChoiceQuestion (question) {
 				<div class="o-forms-field">
 					<div class="o-forms-input o-forms-input--radio-round o-forms-input--inline">
 						<input type="radio" id="${fieldId}" name="${question.questionId}" value="${choiceId}" />
-						<label for="${fieldId}" class="o-forms-input__label ${textVisibility}">
+						<label for="${fieldId}" class="o-forms-input__label">
 							<span class="n-feedback__question-radio-text">${choice.choiceText}</span>
 						</label>
 					</div>
