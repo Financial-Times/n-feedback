@@ -103,6 +103,9 @@
 		margin-bottom: oSpacingByName('s3');
 	}
 
+	.n-feedback__center-block {
+		@include centerForm;
+	}
 }
 
 .feedback-overlay {

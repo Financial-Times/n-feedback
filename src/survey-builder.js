@@ -2,7 +2,7 @@
 const dictionary = require('./dictionary');
 
 function buildHeader (question) {
-	return `<h2 class="n-feedback__question-header">${question.questionText}</h2>`;
+	return `<div class="n-feedback__center-block"><h2 class="n-feedback__question-header">${question.questionText}</h2></div>`;
 }
 
 function buildText (question) {
@@ -10,7 +10,7 @@ function buildText (question) {
 }
 
 function buildFooter (question) {
-	return `<p class="n-feedback__question-footer">${question.questionText}</p>`;
+	return `<div class="n-feedback__center-block"><p class="n-feedback__question-footer">${question.questionText}</p></div>`;
 }
 
 function buildQuestion (question) {
@@ -37,6 +37,7 @@ function buildMultipleChoiceQuestion (question) {
 	const html = [
 		`<fieldset class="n-feedback__question-radio" data-validation=${validation}>
 			<legend>${question.questionText}</legend>
+			<div class="n-feedback__center-block">
 			<div class="o-forms-field">
 			`,
 	]; // fieldsets can't display: flex
@@ -56,7 +57,7 @@ function buildMultipleChoiceQuestion (question) {
 		);
 	});
 
-	html.push('</div></fieldset>');
+	html.push('</div></div></fieldset>');
 	return html.join('\n');
 }
 
@@ -64,7 +65,7 @@ function buildTextEntryQuestion (question) {
 	const fieldId = `text-${question.questionId}-${~~(Math.random()*0xffff)}`;
 
 	const html =
-		`
+		`<div class="n-feedback__center-block">
 			<div class="n-feedback__question-text-entry o-forms">
 				<div class="o-forms-field">
 					<label for="${fieldId}" class="o-forms-label">
@@ -77,6 +78,7 @@ function buildTextEntryQuestion (question) {
 					</label>
 				</div>
 			</div>
+		</div>
 		`;
 
 	return html;
@@ -84,7 +86,7 @@ function buildTextEntryQuestion (question) {
 
 function buildButtonBar (surveyLength, blockId){
 	const blockHTML = [];
-	blockHTML.push('<p class="n-feedback__survey__button-bar">');
+	blockHTML.push('<div class="n-feedback__center-block"><p class="n-feedback__survey__button-bar">');
 
 	if( blockId > 0 ) {
 		blockHTML.push(
@@ -114,7 +116,7 @@ function buildButtonBar (surveyLength, blockId){
 		);
 	}
 
-	blockHTML.push('</p>');
+	blockHTML.push('</p></div>');
 
 	return blockHTML.join('\n');
 }
@@ -175,11 +177,11 @@ function buildSurvey (surveyData, surveyId, domain) {
 
 			${feedbackQuestion ? buildFooter(feedbackQuestion) : ''}
 
-			<p class="n-feedback__survey__button-bar">
+			<div class="n-feedback__center-block"><p class="n-feedback__survey__button-bar">
 				<button class="n-feedback__primary-button o-overlay__close">
 					Close
 				</button>
-		`
+		</div>`
 	);
 
 	surveyHTML.push('</div>');
