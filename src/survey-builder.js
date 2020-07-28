@@ -45,21 +45,18 @@ function buildMultipleChoiceQuestion (question) {
 
 	choices.forEach( ([choiceId, choice]) => {
 		const fieldId = `choice-${choiceId}-${~~(Math.random()*0xffff)}`;
-		html.push(
-			`	
-				<div class="o-forms-input o-forms-input--radio-round o-forms-input--inline">
-					<input type="radio" id="${fieldId}" name="${question.questionId}" value="${choiceId}" />
-					<label for="${fieldId}" class="o-forms-input__label">
-						<span class="n-feedback__question-radio-text">${choice.choiceText}</span>
-					</label>
-				</div>
+		html.push(`
+			<div class="o-forms-input o-forms-input--radio-round o-forms-input--inline">
+				<input type="radio" id="${fieldId}" name="${question.questionId}" value="${choiceId}" />
+				<label for="${fieldId}" class="o-forms-input__label">
+					<span class="n-feedback__question-radio-text">${choice.choiceText}</span>
+				</label>
+			</div>
 			`
 		);
 	});
 
-	html.push("</div></fieldset>");
-
-	
+	html.push('</div></fieldset>');
 	return html.join('\n');
 }
 
