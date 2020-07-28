@@ -49,7 +49,7 @@ function buildMultipleChoiceQuestion (question) {
 			<div class="o-forms-input o-forms-input--radio-round o-forms-input--inline">
 				<input type="radio" id="${fieldId}" name="${question.questionId}" value="${choiceId}" />
 				<label for="${fieldId}" class="o-forms-input__label">
-					<span class="n-feedback__question-radio-text">${choice.choiceText}</span>
+					${choice.choiceText}
 				</label>
 			</div>
 			`
