@@ -71,9 +71,9 @@ function buildTextEntryQuestion (question) {
 						<span class="o-forms-title">
 							<span class="o-forms-title__main">${question.questionText}</span>
 						</span>
-						<span class="o-forms-input o-forms-input--textarea">
-							<textarea id="${fieldId}" name="${question.questionId}"></textarea>
-						</span>
+						<div class="o-forms-input o-forms-input--textarea">
+							<textarea id="${fieldId}" name="${question.questionId}" rows="8"></textarea>
+						</div>
 					</label>
 				</div>
 			</div>

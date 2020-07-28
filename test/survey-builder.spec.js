@@ -42,7 +42,7 @@ describe('surveyBuilder()', () => {
 
 		it('should be rendered', () => {
 			expect(document.querySelector('.n-feedback__survey-block div.n-feedback__question-text-entry.o-forms .o-forms-field label.o-forms-label span.o-forms-title span.o-forms-title__main')).to.exist;
-			expect(document.querySelector('.n-feedback__survey-block div.n-feedback__question-text-entry.o-forms .o-forms-field label.o-forms-label span.o-forms-input.o-forms-input--textarea textarea')).to.exist;
+			expect(document.querySelector('.n-feedback__survey-block div.n-feedback__question-text-entry.o-forms .o-forms-field label.o-forms-label div.o-forms-input.o-forms-input--textarea textarea')).to.exist;
 		});
 	});
 

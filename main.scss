@@ -8,7 +8,7 @@
 
 @include oForms($opts: (
 	'elements': (
-		'text-area',
+		'textarea',
 		'radio-round'
 	)
 ));
@@ -158,18 +158,12 @@
 	}
 
 	.n-feedback__question-text-entry {
-		padding-left: 10px;
-		padding-right: 10px;
-
 		.o-forms-field {
 			margin-bottom: 20px;
 			display: block;
 
 			textarea {
-				width: 100%;
-				min-height: 126px;
-				resize: none;
-				margin-top: 12px;
+				max-height: 240px;
 			}
 		}
 	}
