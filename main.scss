@@ -59,7 +59,8 @@
 		right: 42px;
 		bottom: 36px;
 		width: 300px;
-		height: 300px;
+		// height: 300px;
+		max-height: calc(100vh - 72px);
 	}
 
 	.n-feedback__desktop__prompt {
@@ -101,9 +102,6 @@
 		margin-bottom: oSpacingByName('s3');
 	}
 
-	.n-feedback__center-block {
-		@include centerForm;
-	}
 }
 
 .feedback-overlay {
@@ -181,45 +179,11 @@
 		border-right: none;
 		padding: 16px 0;
 
+		.o-forms-field {
+			margin-bottom:12px;
+		}
+
 		legend {
-			@include oNormaliseVisuallyHidden;
-		}
-
-		.n-feedback__question-radio__container {
-			display: flex;
-			flex-direction: column;
-			@include oGridRespondTo($until: M){
-				@include centerForm;
-			}
-		}
-
-		.n-feedback__question-radio__choice-container {
-			.o-forms-field,
-			.o-forms-input {
-				margin: 0;
-			}
-		}
-
-		// Force the input and label into a vertical orientation
-		label {
-			display: block;
-			margin-top:4px;
-			margin-bottom: 4px;
-
-			&:before,
-			&:after {
-				left: 20px;
-				transform: translateX(-50%);
-				margin-left: 0; // this is for the selected state
-			}
-
-			span {
-				display: block;
-				margin-left: 20px;
-			}
-		}
-
-		.hidden-label span {
 			@include oNormaliseVisuallyHidden;
 		}
 	}

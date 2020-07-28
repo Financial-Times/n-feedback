@@ -2,7 +2,7 @@
 const dictionary = require('./dictionary');
 
 function buildHeader (question) {
-	return `<div class="n-feedback__center-block"><h2 class="n-feedback__question-header">${question.questionText}</h2></div>`;
+	return `<h2 class="n-feedback__question-header">${question.questionText}</h2>`;
 }
 
 function buildText (question) {
@@ -10,7 +10,7 @@ function buildText (question) {
 }
 
 function buildFooter (question) {
-	return `<div class="n-feedback__center-block"><p class="n-feedback__question-footer">${question.questionText}</p></div>`;
+	return `<p class="n-feedback__question-footer">${question.questionText}</p>`;
 }
 
 function buildQuestion (question) {
@@ -37,29 +37,29 @@ function buildMultipleChoiceQuestion (question) {
 	const html = [
 		`<fieldset class="n-feedback__question-radio" data-validation=${validation}>
 			<legend>${question.questionText}</legend>
-			<div class="n-feedback__question-radio__container n-feedback__center-block">`
+			<div class="o-forms-field">
+			`,
 	]; // fieldsets can't display: flex
 
 	const choices = Object.entries(question.choices).reverse();
 
 	choices.forEach( ([choiceId, choice]) => {
 		const fieldId = `choice-${choiceId}-${~~(Math.random()*0xffff)}`;
-
 		html.push(
-			`<div class="n-feedback__question-radio__choice-container">
-				<div class="o-forms-field">
-					<div class="o-forms-input o-forms-input--radio-round o-forms-input--inline">
-						<input type="radio" id="${fieldId}" name="${question.questionId}" value="${choiceId}" />
-						<label for="${fieldId}" class="o-forms-input__label">
-							<span class="n-feedback__question-radio-text">${choice.choiceText}</span>
-						</label>
-					</div>
+			`	
+				<div class="o-forms-input o-forms-input--radio-round o-forms-input--inline">
+					<input type="radio" id="${fieldId}" name="${question.questionId}" value="${choiceId}" />
+					<label for="${fieldId}" class="o-forms-input__label">
+						<span class="n-feedback__question-radio-text">${choice.choiceText}</span>
+					</label>
 				</div>
-			</div>`
+			`
 		);
 	});
 
-	html.push('</div></fieldset>');
+	html.push("</div></fieldset>");
+
+	
 	return html.join('\n');
 }
 
@@ -67,7 +67,7 @@ function buildTextEntryQuestion (question) {
 	const fieldId = `text-${question.questionId}-${~~(Math.random()*0xffff)}`;
 
 	const html =
-		`<div class="n-feedback__center-block">
+		`
 			<div class="n-feedback__question-text-entry o-forms">
 				<div class="o-forms-field">
 					<label for="${fieldId}" class="o-forms-label">
@@ -80,14 +80,14 @@ function buildTextEntryQuestion (question) {
 					</label>
 				</div>
 			</div>
-		</div>`;
+		`;
 
 	return html;
 }
 
 function buildButtonBar (surveyLength, blockId){
 	const blockHTML = [];
-	blockHTML.push('<div class="n-feedback__center-block"><p class="n-feedback__survey__button-bar">');
+	blockHTML.push('<p class="n-feedback__survey__button-bar">');
 
 	if( blockId > 0 ) {
 		blockHTML.push(
@@ -117,7 +117,7 @@ function buildButtonBar (surveyLength, blockId){
 		);
 	}
 
-	blockHTML.push('</p></div>');
+	blockHTML.push('</p>');
 
 	return blockHTML.join('\n');
 }
@@ -178,11 +178,11 @@ function buildSurvey (surveyData, surveyId, domain) {
 
 			${feedbackQuestion ? buildFooter(feedbackQuestion) : ''}
 
-			<div class="n-feedback__center-block"><p class="n-feedback__survey__button-bar">
+			<p class="n-feedback__survey__button-bar">
 				<button class="n-feedback__primary-button o-overlay__close">
 					Close
 				</button>
-		</div>`
+		`
 	);
 
 	surveyHTML.push('</div>');
