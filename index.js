@@ -1,4 +1,7 @@
-const Overlay = require('o-overlay').default;
+// o-overlay export is different depending on if n-feedback is being imported using bower or npm
+let Overlay = require('o-overlay');
+Overlay = Overlay.default || Overlay;
+
 const surveyBuilder = require('./src/survey-builder');
 const postResponse = require('./src/post-response');
 const getAdditionalInfo = require('./src/get-additional-info');
