@@ -1,10 +1,10 @@
 node_modules/
-bower_components/
 .DS_Store
 .editorconfig
 .eslintrc.js
-/public/main.css
-/public/main.js
+/public/manifest.json
+/public/styles.css
+/public/scripts.bundle.js
 /pa11y_screenCapture/*
 *.env*
 node_modules
