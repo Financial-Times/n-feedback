@@ -1,5 +1,5 @@
 // o-overlay export is different depending on if n-feedback is being imported using bower or npm
-let Overlay = require('@financial-times/o-overlay');
+let Overlay = require('o-overlay');
 Overlay = Overlay.default || Overlay;
 
 const surveyBuilder = require('./src/survey-builder');
