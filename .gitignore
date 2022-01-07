@@ -7,4 +7,3 @@ bower_components/
 /public/main.js
 /pa11y_screenCapture/*
 *.env*
-node_modules
