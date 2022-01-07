@@ -14,9 +14,9 @@
     "preinstall": "[ \"$INIT_CWD\" != \"$PWD\" ] || npm_config_yes=true npx check-engine"
   },
   "devDependencies": {
-    "@financial-times/dotcom-build-base": "^3.0.0",
-    "@financial-times/dotcom-build-js": "^3.0.0",
-    "@financial-times/dotcom-build-sass": "^3.0.0",
+    "@financial-times/dotcom-build-base": "3.0.0",
+    "@financial-times/dotcom-build-js": "3.0.0",
+    "@financial-times/dotcom-build-sass": "3.0.0",
     "@financial-times/n-gage": "^8.2.0",
     "@financial-times/n-internal-tool": "^2.3.1",
     "chai": "^4.2.0",
