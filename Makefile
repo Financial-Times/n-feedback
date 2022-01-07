@@ -12,14 +12,13 @@ test:
 	make unit-test
 
 demo-build:
-	@rm -rf bower_components/n-feedback
-	@mkdir bower_components/n-feedback
-	@cp main.scss bower_components/n-feedback/main.scss
-	@cp index.js bower_components/n-feedback/index.js
-	@cp -r src/ bower_components/n-feedback/src/
-	@cp -r templates/ bower_components/n-feedback/templates/
+	@rm -rf node_modules/n-feedback
+	@mkdir node_modules/n-feedback
+	@cp main.scss node_modules/n-feedback/main.scss
+	@cp index.js node_modules/n-feedback/index.js
+	@cp -r src/ node_modules/n-feedback/src/
+	@cp -r templates/ node_modules/n-feedback/templates/
 	@webpack --mode development
-	@node-sass demos/src/demo.scss public/main.css --include-path bower_components
 	@$(DONE)
 
 demo: demo-build
