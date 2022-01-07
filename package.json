@@ -14,10 +14,11 @@
     "preinstall": "[ \"$INIT_CWD\" != \"$PWD\" ] || npm_config_yes=true npx check-engine"
   },
   "devDependencies": {
+    "@financial-times/dotcom-build-base": "^3.0.0",
+    "@financial-times/dotcom-build-js": "^3.0.0",
+    "@financial-times/dotcom-build-sass": "^3.0.0",
     "@financial-times/n-gage": "^8.2.0",
     "@financial-times/n-internal-tool": "^2.3.1",
-    "bower": "^1.8.8",
-    "bower-resolve-webpack-plugin": "^1.0.4",
     "chai": "^4.2.0",
     "check-engine": "^1.10.1",
     "enhanced-resolve": "^3.1.0",
@@ -26,8 +27,8 @@
     "jsdom": "^12.2.0",
     "lintspaces-cli": "^0.6.0",
     "mocha": "^5.2.0",
+    "n-ui-foundations": "^7.0.2",
     "nock": "^10.0.1",
-    "node-sass": "^4.5.3",
     "nodemon": "^1.17.3",
     "npm-prepublish": "^1.2.2",
     "proxyquire": "^2.1.0",
@@ -36,17 +37,17 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "handlebars": "^4.1.2",
-    "o-buttons": "npm:@financial-times/o-buttons@^6.0.0",
-    "o-forms": "npm:@financial-times/o-forms@^8.0.0",
-    "o-loading": "npm:@financial-times/o-loading@^4.0.0",
-    "o-overlay": "npm:@financial-times/o-overlay@^3.0.0",
-    "o-typography": "npm:@financial-times/o-typography@^6.0.0"
+    "@financial-times/o-buttons": "^7.2.1",
+    "@financial-times/o-forms": "^9.2.1",
+    "@financial-times/o-loading": "^5.2.0",
+    "@financial-times/o-overlay": "^4.2.2",
+    "@financial-times/o-typography": "^7.2.1",
+    "handlebars": "^4.1.2"
   },
   "husky": {
     "hooks": {
       "commit-msg": "node_modules/.bin/secret-squirrel-commitmsg",
-      "pre-commit": "node_modules/.bin/secret-squirrel && node ./scripts/fromBowerToNpm.js",
+      "pre-commit": "node_modules/.bin/secret-squirrel",
       "pre-push": "make verify -j3"
     }
   },

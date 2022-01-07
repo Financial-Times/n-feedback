@@ -15,10 +15,6 @@ Go to [http://local.ft.com:5005/](http://local.ft.com:5005/)
 ```
 npm install --save @financial-times/n-feedback
 ```
-or
-```
-bower install --save n-feedback
-```
 
 Use handlebars template
 ```
