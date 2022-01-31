@@ -1,7 +1,12 @@
-const express = require('@financial-times/n-internal-tool');
+const express = require('@financial-times/n-express');
 const chalk = require('chalk');
 const errorHighlight = chalk.bold.red;
 const highlight = chalk.bold.green;
+const { PageKitHandlebars, helpers } = require('@financial-times/dotcom-server-handlebars');
+const handlebars = require('handlebars');
+const path = require('path');
+const fs = require('fs');
+// const hbs = require('hbs');
 
 const app = module.exports = express({
 	name: 'public',
@@ -15,8 +20,46 @@ const app = module.exports = express({
 	partialsDirectory: process.cwd(),
 	directory: process.cwd(),
 	demo: true,
-	s3o: false
+	s3o: false,
+	withConsent: false,
+	withServiceMetrics: false,
+	withBackendAuthentication: false,
 });
+
+// console.log(app)
+// app.set('views', path.join(__dirname, '/templates'));
+// app.set('view engine', '.html');
+
+const templateDirectory = path.join(__dirname, '../templates');
+
+fs.readdirSync(templateDirectory).forEach(filename => {
+	handlebars.registerPartial(
+		`templates/${filename.substr(0, filename.lastIndexOf('.'))}`,
+		fs.readFileSync(path.join(templateDirectory, filename), 'utf8')
+	);
+});
+
+const rootDirectory = __dirname
+
+fs.readdirSync(rootDirectory).forEach(filename => {
+	if (filename.includes('html')){
+		handlebars.registerPartial(
+			`demos/${filename.substr(0, filename.lastIndexOf('.'))}`,
+			fs.readFileSync(path.join(rootDirectory, filename), 'utf8')
+		);
+	}
+});
+
+app.set('views', __dirname);
+app.set('view engine', '.html');
+
+app.engine('.html', new PageKitHandlebars({
+	cache: false,
+	handlebars,
+	helpers: {
+		...helpers
+	}
+}).engine);
 
 app.get('/', (req, res) => {
 	res.render('demo', {

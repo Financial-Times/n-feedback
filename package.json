@@ -37,12 +37,19 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
+    "@financial-times/dotcom-middleware-app-context": "3.0.0",
+    "@financial-times/dotcom-middleware-asset-loader": "3.0.0",
+    "@financial-times/dotcom-middleware-navigation": "3.0.0",
+    "@financial-times/dotcom-server-handlebars": "3.0.0",
+    "@financial-times/dotcom-ui-app-context": "3.0.0",
     "@financial-times/o-buttons": "^7.2.1",
     "@financial-times/o-forms": "^9.2.1",
     "@financial-times/o-loading": "^5.2.0",
     "@financial-times/o-overlay": "^4.2.2",
     "@financial-times/o-typography": "^7.2.1",
-    "handlebars": "^4.1.2"
+    "ejs": "^3.1.6",
+    "handlebars": "^4.1.2",
+    "path": "^0.12.7"
   },
   "husky": {
     "hooks": {
