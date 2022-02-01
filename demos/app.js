@@ -6,7 +6,6 @@ const { PageKitHandlebars, helpers } = require('@financial-times/dotcom-server-h
 const handlebars = require('handlebars');
 const path = require('path');
 const fs = require('fs');
-// const hbs = require('hbs');
 
 const app = module.exports = express({
 	name: 'public',
@@ -21,17 +20,9 @@ const app = module.exports = express({
 	directory: process.cwd(),
 	demo: true,
 	s3o: false,
-	withConsent: false,
-	withServiceMetrics: false,
-	withBackendAuthentication: false,
 });
 
-// console.log(app)
-// app.set('views', path.join(__dirname, '/templates'));
-// app.set('view engine', '.html');
-
 const templateDirectory = path.join(__dirname, '../templates');
-
 fs.readdirSync(templateDirectory).forEach(filename => {
 	handlebars.registerPartial(
 		`templates/${filename.substr(0, filename.lastIndexOf('.'))}`,
@@ -39,8 +30,7 @@ fs.readdirSync(templateDirectory).forEach(filename => {
 	);
 });
 
-const rootDirectory = __dirname
-
+const rootDirectory = __dirname;
 fs.readdirSync(rootDirectory).forEach(filename => {
 	if (filename.includes('html')){
 		handlebars.registerPartial(
