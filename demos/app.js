@@ -42,6 +42,7 @@ fs.readdirSync(rootDirectory).forEach(filename => {
 
 app.set('views', __dirname);
 app.set('view engine', '.html');
+app.use('/public', express.static('public'));
 
 app.engine('.html', new PageKitHandlebars({
 	cache: false,
