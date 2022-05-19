@@ -27,7 +27,7 @@
     "jsdom": "^12.2.0",
     "lintspaces-cli": "^0.6.0",
     "mocha": "^5.2.0",
-    "n-ui-foundations": "^7.0.2",
+    "n-ui-foundations": "^9.0.0",
     "nock": "^10.0.1",
     "nodemon": "^1.17.3",
     "npm-prepublish": "^1.2.2",
@@ -38,12 +38,14 @@
   },
   "dependencies": {
     "@financial-times/dotcom-server-handlebars": "3.0.0",
+    "handlebars": "^4.1.2"
+  },
+  "peerDependencies": {
     "@financial-times/o-buttons": "^7.2.1",
     "@financial-times/o-forms": "^9.2.1",
     "@financial-times/o-loading": "^5.2.0",
     "@financial-times/o-overlay": "^4.2.2",
-    "@financial-times/o-typography": "^7.2.1",
-    "handlebars": "^4.1.2"
+    "@financial-times/o-typography": "^7.2.1"
   },
   "husky": {
     "hooks": {
