@@ -8,7 +8,7 @@ const getAdditionalInfo = require('./src/get-additional-info');
 const dictionary = require('./src/dictionary');
 
 
-function getSurveyData(surveyId) {
+function getSurveyData (surveyId) {
 	// const surveyDataURL = 'http://localhost:5005/public/survey.json'; // for local development
 	// const surveyDataURL = `http://localhost:3002/v1/survey/${surveyId}`; // for local development via npm linking
 	const surveyDataURL = `https://www.ft.com/__feedback-api/v1/survey/${surveyId}`; // production link
@@ -26,7 +26,7 @@ function getSurveyData(surveyId) {
 	});
 }
 
-function setBehaviour(overlay, surveyData, surveyId, appInfo) {
+function setBehaviour (overlay, surveyData, surveyId, appInfo) {
 	const context = overlay.content;
 	const {containerSelector = 'body'} = appInfo;
 
@@ -78,7 +78,7 @@ function setBehaviour(overlay, surveyData, surveyId, appInfo) {
 	}
 }
 
-function displayBlock(overlay, blockClass) {
+function displayBlock (overlay, blockClass) {
 	const context = overlay.content;
 	const nextBlock = document.querySelector(blockClass, context);
 	const allBlocks = document.querySelectorAll('.n-feedback__survey-block', context);
@@ -89,7 +89,7 @@ function displayBlock(overlay, blockClass) {
 	nextBlock.classList.remove('n-feedback--hidden');
 }
 
-function runValidation(block) {
+function runValidation (block) {
 	const nextButton = document.querySelector('.n-feedback__survey-next', block);
 
 	if (validate(block)) {
@@ -101,7 +101,7 @@ function runValidation(block) {
 	}
 }
 
-function validate(block) {
+function validate (block) {
 	const elements = document.querySelectorAll('[data-validation="true"]', block);
 
 	// Valid form elements return false, only non-valid form elements are returned
@@ -119,7 +119,7 @@ function validate(block) {
 	return invalides.length === 0;
 }
 
-function generateResponse(overlay) {
+function generateResponse (overlay) {
 	const context = overlay.content;
 	const form = document.querySelector('.n-feedback__survey__wrapper-form', context);
 	const data = {};
@@ -141,15 +141,15 @@ function generateResponse(overlay) {
 	return data;
 }
 
-function toggleOverlay(overlay) {
+function toggleOverlay (overlay) {
 	overlay[overlay.visible ? 'close' : 'open']();
 }
 
-function hideFeedbackButton(containerSelector) {
+function hideFeedbackButton (containerSelector) {
 	document.querySelector(`${containerSelector} .n-feedback__container`).classList.add('n-feedback--hidden');
 }
 
-function populateContainer(container, domain) {
+function populateContainer (container, domain) {
 	const text = dictionary[domain].formHead;
 	container.innerHTML =
 		`<div class="n-feedback__overlay__container"></div>
@@ -180,7 +180,7 @@ module.exports.init = (appInfo = {}) => {
 	const container = document.querySelector(`${containerSelector} .n-feedback__container`);
 	if (!container) {
 		// eslint-disable-next-line no-console
-		console.error('The container was not found on the page.')
+		console.error('The container was not found on the page.');
 		throw new Error('The container was not found on the page.');
 	}
 	container.classList.remove('n-feedback--hidden');
