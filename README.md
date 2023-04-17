@@ -1,5 +1,6 @@
 # n-feedback
 Displays a feedback button when clicked, allows you to fill in a form with feedback questions.
+This questions come from "next-feedback-api" that get it from "qualtrics configured survey"
 
 ## Demo
 ```sh
@@ -41,4 +42,9 @@ If you are wanting to deploy to FT.com, after creating the tag you will need to 
 ```sh
 make test        
 ```
+# Monitoring
+To monitoring we can check the grafana panel of "next-feedback-api" to check if the requests still working or if we have an increment of errors on it
+[next-feedback-api](https://grafana.ft.com/d/1eU9QR3mz/next-feedback-api?orgId=1)
+
+
 
