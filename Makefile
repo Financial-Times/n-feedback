@@ -7,6 +7,9 @@ node_modules/@financial-times/n-gage/index.mk:
 unit-test:
 	mocha 'test/**/*.spec.js' --inline-diffs
 
+unit-test-coverage:
+	nyc mocha 'test/**/*.spec.js' --inline-diffs
+
 test:
 	make verify
 	make unit-test
