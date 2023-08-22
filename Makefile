@@ -5,10 +5,10 @@ node_modules/@financial-times/n-gage/index.mk:
 -include node_modules/@financial-times/n-gage/index.mk
 
 unit-test:
-	mocha 'test/**/*.spec.js' --inline-diffs
+	NODE_OPTIONS='--no-experimental-fetch' mocha 'test/**/*.spec.js' --inline-diffs
 
 unit-test-coverage:
-	nyc mocha 'test/**/*.spec.js' --inline-diffs
+	NODE_OPTIONS='--no-experimental-fetch' nyc mocha 'test/**/*.spec.js' --inline-diffs
 
 test:
 	make verify
