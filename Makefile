@@ -21,7 +21,7 @@ demo-build:
 	@cp index.js node_modules/n-feedback/index.js
 	@cp -r src/ node_modules/n-feedback/src/
 	@cp -r templates/ node_modules/n-feedback/templates/
-	@webpack --mode development
+	@NODE_OPTIONS="--openssl-legacy-provider" webpack --mode development
 	@$(DONE)
 
 demo: demo-build
