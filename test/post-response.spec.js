@@ -24,7 +24,7 @@ describe('postResponse()', () => {
 			.post('/survey')
 			.reply(200);
 
-		const response = await postResponse(surveyId, surveyData, responses, additionalData);
+		await postResponse(surveyId, surveyData, responses, additionalData);
 		expect(postNock.isDone()).to.be.true;
 	});
 
