@@ -6,8 +6,10 @@ const surveyBuilder = require('./src/survey-builder');
 const postResponse = require('./src/post-response');
 const getAdditionalInfo = require('./src/get-additional-info');
 const dictionary = require('./src/dictionary');
+const logger = require('@financial-times/n-logger').default;
 
-function getSurveyData ( surveyId ){
+
+function getSurveyData(surveyId) {
 	// const surveyDataURL = 'http://localhost:5005/public/survey.json'; // for local development
 	// const surveyDataURL = `http://localhost:3002/v1/survey/${surveyId}`; // for local development via npm linking
 	const surveyDataURL = `https://www.ft.com/__feedback-api/v1/survey/${surveyId}`; // production link
@@ -15,7 +17,7 @@ function getSurveyData ( surveyId ){
 		headers: {
 			'Accept': 'application/json',
 		}
-	}).then( res => {
+	}).then(res => {
 		if (res.status !== 200) {
 			res.text().then(txt => {
 				throw new Error(`Bad response status ${status}: ${txt}`);
@@ -25,13 +27,13 @@ function getSurveyData ( surveyId ){
 	});
 }
 
-function setBehaviour (overlay, surveyData, surveyId, appInfo) {
+function setBehaviour(overlay, surveyData, surveyId, appInfo) {
 	const context = overlay.content;
-	const { containerSelector = 'body' } = appInfo;
+	const {containerSelector = 'body'} = appInfo;
 
 	// Adding behaviour for Next and Back buttons, moving between blocks/pages
 	const navButtons = document.querySelectorAll('.n-feedback__survey-next,.n-feedback__survey-back', context);
-	navButtons.forEach( button => {
+	navButtons.forEach(button => {
 		button.addEventListener('click', event => {
 			event.preventDefault();
 
@@ -77,39 +79,39 @@ function setBehaviour (overlay, surveyData, surveyId, appInfo) {
 	}
 }
 
-function displayBlock (overlay, blockClass){
+function displayBlock(overlay, blockClass) {
 	const context = overlay.content;
 	const nextBlock = document.querySelector(blockClass, context);
 	const allBlocks = document.querySelectorAll('.n-feedback__survey-block', context);
 
 	runValidation(nextBlock);
 
-	allBlocks.forEach( block => block.classList.add('n-feedback--hidden') );
+	allBlocks.forEach(block => block.classList.add('n-feedback--hidden'));
 	nextBlock.classList.remove('n-feedback--hidden');
 }
 
-function runValidation (block){
+function runValidation(block) {
 	const nextButton = document.querySelector('.n-feedback__survey-next', block);
 
-	if( validate(block) ){
+	if (validate(block)) {
 		nextButton.removeAttribute('disabled');
 		return true;
-	}else{
+	} else {
 		nextButton.setAttribute('disabled', 'disabled');
 		return false;
 	}
 }
 
-function validate (block){
+function validate(block) {
 	const elements = document.querySelectorAll('[data-validation="true"]', block);
 
 	// Valid form elements return false, only non-valid form elements are returned
-	const invalides = Array.prototype.slice.call(elements).filter( el => {
+	const invalides = Array.prototype.slice.call(elements).filter(el => {
 		// TODO: Implement other questions types
 		// For now we have only the radio button that needs validation
-		if( el.classList.contains('n-feedback__question-radio') ){
+		if (el.classList.contains('n-feedback__question-radio')) {
 			const radios = document.querySelectorAll('input[type="radio"]', el);
-			const results = Array.prototype.slice.call(radios).filter( r => r.checked );
+			const results = Array.prototype.slice.call(radios).filter(r => r.checked);
 			// returns false if one of the radio buttons are selected
 			return results.length === 0;
 		}
@@ -118,7 +120,7 @@ function validate (block){
 	return invalides.length === 0;
 }
 
-function generateResponse (overlay){
+function generateResponse(overlay) {
 	const context = overlay.content;
 	const form = document.querySelector('.n-feedback__survey__wrapper-form', context);
 	const data = {};
@@ -128,15 +130,11 @@ function generateResponse (overlay){
 			if (element.checked) {
 				data[element.name] = element.value;
 			}
-		}
-
-		else if (element.type === 'checkbox') {
+		} else if (element.type === 'checkbox') {
 			if (element.checked) {
 				data[element.name] = (data[element.name] || []).concat(element.value);
 			}
-		}
-
-		else {
+		} else {
 			data[element.name] = element.value;
 		}
 	});
@@ -144,15 +142,15 @@ function generateResponse (overlay){
 	return data;
 }
 
-function toggleOverlay (overlay){
-	overlay[ overlay.visible ? 'close' : 'open' ]();
+function toggleOverlay(overlay) {
+	overlay[overlay.visible ? 'close' : 'open']();
 }
 
-function hideFeedbackButton (containerSelector){
+function hideFeedbackButton(containerSelector) {
 	document.querySelector(`${containerSelector} .n-feedback__container`).classList.add('n-feedback--hidden');
 }
 
-function populateContainer (container, domain) {
+function populateContainer(container, domain) {
 	const text = dictionary[domain].formHead;
 	container.innerHTML =
 		`<div class="n-feedback__overlay__container"></div>
@@ -181,6 +179,10 @@ module.exports.init = (appInfo = {}) => {
 	let feedbackOverlay;
 
 	const container = document.querySelector(`${containerSelector} .n-feedback__container`);
+	if (!container) {
+		logger.error('The container was not found on the page.')
+		throw new Error('The container was not found on the page.');
+	}
 	container.classList.remove('n-feedback--hidden');
 	populateContainer(container, domain);
 	const trigger = document.querySelector(`${containerSelector} .n-feedback__container .n-feedback__survey-trigger`);
@@ -199,8 +201,8 @@ module.exports.init = (appInfo = {}) => {
 				});
 			}
 			if (!surveyData) {
-				getSurveyData(surveyId).then( data => {
-					if ( !data || (data && data.length === 0) ) {
+				getSurveyData(surveyId).then(data => {
+					if (!data || (data && data.length === 0)) {
 						// eslint-disable-next-line no-console
 						console.error('Bad survey data');
 					} else {
@@ -218,7 +220,7 @@ module.exports.init = (appInfo = {}) => {
 						const firstBlock = document.querySelectorAll('.n-feedback__survey-block', feedbackOverlay.content)[0];
 						runValidation(firstBlock);
 					}
-				}).catch((err)=> {
+				}).catch((err) => {
 					// In case survey fetch fails
 					feedbackOverlay.destroy();
 					container.classList.add('n-feedback--hidden');
