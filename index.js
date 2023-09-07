@@ -181,7 +181,7 @@ module.exports.init = (appInfo = {}) => {
 	let feedbackOverlay;
 
 	const container = document.querySelector(`${containerSelector} .n-feedback__container`);
-	container.classList.remove('n-feedback--hidden');
+	container ? container.classList.remove('n-feedback--hidden') : console.error('The container was not found on the page.');
 	populateContainer(container, domain);
 	const trigger = document.querySelector(`${containerSelector} .n-feedback__container .n-feedback__survey-trigger`);
 
