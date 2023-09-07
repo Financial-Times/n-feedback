@@ -6,6 +6,8 @@ const surveyBuilder = require('./src/survey-builder');
 const postResponse = require('./src/post-response');
 const getAdditionalInfo = require('./src/get-additional-info');
 const dictionary = require('./src/dictionary');
+const logger = require('@financial-times/n-logger').default;
+
 
 function getSurveyData ( surveyId ){
 	// const surveyDataURL = 'http://localhost:5005/public/survey.json'; // for local development
@@ -181,7 +183,7 @@ module.exports.init = (appInfo = {}) => {
 	let feedbackOverlay;
 
 	const container = document.querySelector(`${containerSelector} .n-feedback__container`);
-	container ? container.classList.remove('n-feedback--hidden') : console.error('The container was not found on the page.');
+	container ? container.classList.remove('n-feedback--hidden') : logger.error('The container was not found on the page.');
 	populateContainer(container, domain);
 	const trigger = document.querySelector(`${containerSelector} .n-feedback__container .n-feedback__survey-trigger`);
 
