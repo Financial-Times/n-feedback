@@ -15,6 +15,9 @@ hooks:
   build:local:
     - Prebuild
     - WebpackDevelopment
+  build:ci:
+    - Prebuild
+    - WebpackProduction
 options:
   "@dotcom-tool-kit/eslint":
     files: "**/*.js"
