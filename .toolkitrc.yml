@@ -4,6 +4,7 @@ plugins:
   - "@dotcom-tool-kit/mocha"
   - "@dotcom-tool-kit/eslint"
   - "@dotcom-tool-kit/webpack"
+  - './toolkit/prebuild'
 hooks:
   test:local:
     - Eslint
@@ -12,6 +13,7 @@ hooks:
     - Eslint
     - Mocha
   build:local:
+    - Prebuild
     - WebpackDevelopment
 options:
   "@dotcom-tool-kit/eslint":
