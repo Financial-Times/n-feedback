@@ -1,0 +1,23 @@
+plugins:
+  - "@dotcom-tool-kit/component"
+  - "@dotcom-tool-kit/jest"
+  - "@dotcom-tool-kit/mocha"
+  - "@dotcom-tool-kit/eslint"
+  - "@dotcom-tool-kit/webpack"
+hooks:
+  test:local:
+    - Eslint
+    - Mocha
+  test:ci:
+    - Eslint
+    - Mocha
+  build:local:
+    - WebpackDevelopment
+options:
+  "@dotcom-tool-kit/eslint":
+    files: "**/*.js"
+  "@dotcom-tool-kit/mocha":
+    configPath: ".mocharc.json"
+    files: ""
+  "@dotcom-tool-kit/webpack":
+    configPath: "./webpack.config.js"

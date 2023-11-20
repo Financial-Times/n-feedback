@@ -180,7 +180,7 @@ module.exports.init = (appInfo = {}) => {
 	const container = document.querySelector(`${containerSelector} .n-feedback__container`);
 	if (!container) {
 		// eslint-disable-next-line no-console
-		console.error('The container was not found on the page.')
+        console.error('The container was not found on the page.');
 		throw new Error('The container was not found on the page.');
 	}
 	container.classList.remove('n-feedback--hidden');

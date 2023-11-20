@@ -1,0 +1,12 @@
+{
+  "diff": true,
+  "inline-diffs": true,
+  "exit": true,
+  "extension": [
+    "js"
+  ],
+  "package": "./package.json",
+  "spec": [
+    "test/**/*.spec.js"
+  ]
+}
