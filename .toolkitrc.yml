@@ -19,7 +19,7 @@ hooks:
     - WebpackProduction
 options:
   "@dotcom-tool-kit/eslint":
-    files: "**/*.js"
+    files: "{,!(public)/**/}*.js"
   "@dotcom-tool-kit/mocha":
     configPath: ".mocharc.json"
     files: ""
