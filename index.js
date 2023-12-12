@@ -176,62 +176,65 @@ module.exports.init = (appInfo = {}) => {
 	} = setAppInfoDefault(appInfo);
 	let surveyData;
 	let feedbackOverlay;
-
+	const cookieConsent = document.cookie.includes('FTCookieConsentGDPR=true')
 	const container = document.querySelector(`${containerSelector} .n-feedback__container`);
 	if (!container) {
 		// eslint-disable-next-line no-console
 		console.error('The container was not found on the page.');
 		throw new Error('The container was not found on the page.');
 	}
-	container.classList.remove('n-feedback--hidden');
-	populateContainer(container, domain);
-	const trigger = document.querySelector(`${containerSelector} .n-feedback__container .n-feedback__survey-trigger`);
+	if (cookieConsent) {
+		container.classList.remove('n-feedback--hidden');
+		populateContainer(container, domain);
+		const trigger = document.querySelector(`${containerSelector} .n-feedback__container .n-feedback__survey-trigger`);
 
-	const overlayId = `feedback-overlay-${containerSelector}`;
+		const overlayId = `feedback-overlay-${containerSelector}`;
 
-	if (trigger) {
-		trigger.addEventListener('click', () => {
-			if (!feedbackOverlay) {
-				feedbackOverlay = new Overlay(overlayId, {
-					html: '<div class="feedback-overlay__loader-wrapper"><div class="o-loading o-loading--dark o-loading--large"></div></div>',
-					fullscreen: true,
-					class: 'feedback-overlay',
-					zindex: 1001,
-					customclose: '.n-feedback__survey__close-button'
-				});
-			}
-			if (!surveyData) {
-				getSurveyData(surveyId).then(data => {
-					if (!data || (data && data.length === 0)) {
-						// eslint-disable-next-line no-console
-						console.error('Bad survey data');
-					} else {
-						surveyData = data;
-						const html = surveyBuilder.buildSurvey(surveyData, surveyId, domain);
-						// TODO: Validate the html
-						if (!feedbackOverlay.visible) {
-							feedbackOverlay.open();
+		if (trigger) {
+			trigger.addEventListener('click', () => {
+				if (!feedbackOverlay) {
+					feedbackOverlay = new Overlay(overlayId, {
+						html: '<div class="feedback-overlay__loader-wrapper"><div class="o-loading o-loading--dark o-loading--large"></div></div>',
+						fullscreen: true,
+						class: 'feedback-overlay',
+						zindex: 1001,
+						customclose: '.n-feedback__survey__close-button'
+					});
+				}
+				if (!surveyData) {
+					getSurveyData(surveyId).then(data => {
+						if (!data || (data && data.length === 0)) {
+							// eslint-disable-next-line no-console
+							console.error('Bad survey data');
+						} else {
+							surveyData = data;
+							const html = surveyBuilder.buildSurvey(surveyData, surveyId, domain);
+							// TODO: Validate the html
+							if (!feedbackOverlay.visible) {
+								feedbackOverlay.open();
+							}
+
+							feedbackOverlay.content.innerHTML = html;
+							setBehaviour(feedbackOverlay, surveyData, surveyId, appInfo);
+
+							// run Validation as soon as you display the first block
+							const firstBlock = document.querySelectorAll('.n-feedback__survey-block', feedbackOverlay.content)[0];
+							runValidation(firstBlock);
 						}
+					}).catch((err) => {
+						// In case survey fetch fails
+						feedbackOverlay.destroy();
+						container.classList.add('n-feedback--hidden');
+						trigger.classList.add('n-feedback--hidden');
+						// eslint-disable-next-line no-console
+						console.error('Failed to get survey data', err);
+					});
+				}
 
-						feedbackOverlay.content.innerHTML = html;
-						setBehaviour(feedbackOverlay, surveyData, surveyId, appInfo);
+				toggleOverlay(feedbackOverlay);
+			}, true);
+		}
 
-						// run Validation as soon as you display the first block
-						const firstBlock = document.querySelectorAll('.n-feedback__survey-block', feedbackOverlay.content)[0];
-						runValidation(firstBlock);
-					}
-				}).catch((err) => {
-					// In case survey fetch fails
-					feedbackOverlay.destroy();
-					container.classList.add('n-feedback--hidden');
-					trigger.classList.add('n-feedback--hidden');
-					// eslint-disable-next-line no-console
-					console.error('Failed to get survey data', err);
-				});
-			}
-
-			toggleOverlay(feedbackOverlay);
-		}, true);
 	}
 
 	return {
