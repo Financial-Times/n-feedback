@@ -176,7 +176,7 @@ module.exports.init = (appInfo = {}) => {
 	} = setAppInfoDefault(appInfo);
 	let surveyData;
 	let feedbackOverlay;
-	const cookieConsent = document.cookie.includes('FTCookieConsentGDPR=true')
+	const cookieConsent = document?.cookie?.includes('FTCookieConsentGDPR=true')
 	const container = document.querySelector(`${containerSelector} .n-feedback__container`);
 	if (!container) {
 		// eslint-disable-next-line no-console
