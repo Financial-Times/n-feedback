@@ -63,8 +63,6 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "node_modules/.bin/secret-squirrel-commitmsg",
-      "pre-commit": "node_modules/.bin/secret-squirrel",
       "pre-push": "npm run test"
     }
   },
