@@ -27,9 +27,9 @@
     "@dotcom-tool-kit/jest": "^3.2.2",
     "@dotcom-tool-kit/mocha": "^3.1.5",
     "@dotcom-tool-kit/webpack": "^3.1.6",
-    "@financial-times/dotcom-build-base": "3.0.0",
-    "@financial-times/dotcom-build-js": "3.0.0",
-    "@financial-times/dotcom-build-sass": "3.0.0",
+    "@financial-times/dotcom-build-base": "9.3.4",
+    "@financial-times/dotcom-build-js": "9.3.4",
+    "@financial-times/dotcom-build-sass": "9.3.4",
     "@financial-times/eslint-config-next": "^7.1.0",
     "@financial-times/n-express": "^21.0.9",
     "chai": "^4.2.0",
@@ -51,7 +51,7 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "@financial-times/dotcom-server-handlebars": "3.0.0",
+    "@financial-times/dotcom-server-handlebars": "9.3.4",
     "handlebars": "^4.1.2"
   },
   "peerDependencies": {
